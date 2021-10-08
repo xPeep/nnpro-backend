@@ -26,6 +26,7 @@ dependencies {
     implementation("io.springfox:springfox-swagger2:3.0.0")
     implementation("io.springfox:springfox-swagger-ui:2.9.2")
 
+    implementation("org.liquibase:liquibase-core:4.5.0")
     implementation("org.postgresql:postgresql")
 
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
