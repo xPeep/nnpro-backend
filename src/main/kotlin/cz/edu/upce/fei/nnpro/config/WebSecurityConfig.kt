@@ -1,4 +1,4 @@
-package cz.edu.upce.fei.nnpro.security
+package cz.edu.upce.fei.nnpro.config
 
 import cz.edu.upce.fei.nnpro.security.jwt.AuthEntryPointJwt
 import cz.edu.upce.fei.nnpro.security.jwt.AuthTokenFilter

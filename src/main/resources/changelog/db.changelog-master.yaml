@@ -1,0 +1,44 @@
+databaseChangeLog:
+  #<editor-fold desc="changeset 1">
+  - changeSet:
+      id: 1
+      author: drymlj
+      changes:
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: nvarchar(30)
+              - column:
+                  name: email
+                  type: nvarchar(50)
+              - column:
+                  name: password
+                  type: nvarchar(100)
+              - column:
+                  name: role
+                  type: nvarchar(20)
+        - insert:
+            tableName: users
+            columns:
+              - column:
+                  name: username
+                  value: admin
+              - column:
+                  name: email
+                  value: admin@test.cz
+              - column:
+                  name: password
+                  value: $2a$10$qw1xEK9CrHizlecUs8r/zedWzOL4Q3f5Tpm3SwmbCX0W9Ha9LAZHm #encrypted 'password'
+              - column:
+                  name: role
+                  value: ROLE_ADMIN
+  #</editor-fold>
