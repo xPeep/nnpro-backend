@@ -19,7 +19,9 @@ class User(
     var email: @NotBlank @Size(max = 50) @Email String = "",
     var password: @NotBlank @Size(max = 120) String = "",
     @Enumerated(EnumType.STRING)
-    var role: Role = Role.ROLE_USER
+    var role: Role = Role.ROLE_USER,
+    @Enumerated(EnumType.STRING)
+    var group: UserGroup = UserGroup.NONE
 ) {
     fun toDto() = UserDto(id, username, email, "", role.toString())
 }
