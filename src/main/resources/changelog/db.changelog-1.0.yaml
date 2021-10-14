@@ -1,0 +1,354 @@
+databaseChangeLog:
+  #<editor-fold desc="changeset 1 - init DDL changeset">
+  - changeSet:
+      id: 1
+      author: drymlj
+      changes:
+
+        - createTable:
+            tableName: users
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: users_pkey
+              - column:
+                  name: email
+                  type: VARCHAR(255)
+              - column:
+                  name: password
+                  type: VARCHAR(255)
+              - column:
+                  name: role
+                  type: VARCHAR(255)
+              - column:
+                  name: username
+                  type: VARCHAR(255)
+              - column:
+                  name: group
+                  type: VARCHAR(255)
+
+
+        - createTable:
+            tableName: incident
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: incident_pkey
+              - column:
+                  name: description
+                  type: VARCHAR(255)
+              - column:
+                  name: end_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: severity
+                  type: VARCHAR(255)
+              - column:
+                  name: start_date
+                  type: TIMESTAMP WITHOUT TIME ZONE
+              - column:
+                  name: rail_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: rail
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: rail_pkey
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: enabled
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: source_station_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: target_station_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: region
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: region_pkey
+              - column:
+                  name: code
+                  type: VARCHAR(3)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+
+        - createTable:
+            tableName: station
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: station_pkey
+              - column:
+                  name: code
+                  type: VARCHAR(255)
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: x
+                  type: FLOAT8
+                  constraints:
+                    nullable: false
+              - column:
+                  name: y
+                  type: FLOAT8
+                  constraints:
+                    nullable: false
+              - column:
+                  name: region_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: substitute_route_section
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: substitute_route_section_pkey
+              - column:
+                  name: route_order
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: station_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: substitute_route_id
+                  type: BIGINT
+
+        - createTable:
+            tableName: substitute_route
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: substitute_route_pkey
+              - column:
+                  name: name
+                  type: VARCHAR(255)
+              - column:
+                  name: train_route_id
+                  type: BIGINT
+
+        - createTable:
+            tableName: train_route_section
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+                    primaryKeyName: train_route_section_pkey
+              - column:
+                  name: route_order
+                  type: INTEGER
+                  constraints:
+                    nullable: false
+              - column:
+                  name: rail_id
+                  type: BIGINT
+                  constraints:
+                    nullable: false
+              - column:
+                  name: train_route_id
+                  type: BIGINT
+
+        - createTable:
+            tableName: train_route
+            columns:
+              - column:
+                  name: id
+                  type: BIGINT
+                  autoIncrement: true
+                  constraints:
+                    nullable: false
+                    primaryKey: true
+                    primaryKeyName: train_route_pkey
+              - column:
+                  name: closure
+                  type: BOOLEAN
+                  constraints:
+                    nullable: false
+              - column:
+                  name: train_code
+                  type: VARCHAR(255)
+
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: incident
+            constraintName: fk_incident_user
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: users
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: rail_id
+            baseTableName: incident
+            constraintName: fk_incident_rail
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: rail
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: source_station_id
+            baseTableName: rail
+            constraintName: fk_rail_source_station
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: station
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: rail_id
+            baseTableName: train_route_section
+            constraintName: fk_trs_rail
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: rail
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: target_station_id
+            baseTableName: rail
+            constraintName: fk_rail_target_station
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: station
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: region_id
+            baseTableName: station
+            constraintName: fk_station_region
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: region
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: station_id
+            baseTableName: substitute_route_section
+            constraintName: fk_srs_station
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: station
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: substitute_route_id
+            baseTableName: substitute_route_section
+            constraintName: fk_srs_substitute_route
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: substitute_route
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: train_route_id
+            baseTableName: substitute_route
+            constraintName: fk_sr_train_route
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: train_route
+            validate: true
+
+        - addForeignKeyConstraint:
+            baseColumnNames: train_route_id
+            baseTableName: train_route_section
+            constraintName: fk_trs_train_route
+            onDelete: NO ACTION
+            onUpdate: NO ACTION
+            referencedColumnNames: id
+            referencedTableName: train_route
+            validate: true
+
+        - addUniqueConstraint:
+            columnNames: email
+            constraintName: uq_users_email
+            tableName: users
+
+        - addUniqueConstraint:
+            columnNames: username
+            constraintName: uq_users_username
+            tableName: users
+  #</editor-fold>
