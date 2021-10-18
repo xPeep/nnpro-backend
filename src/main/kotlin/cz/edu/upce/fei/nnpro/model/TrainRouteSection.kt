@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
+import cz.edu.upce.fei.nnpro.dto.TrainRouteSectionDto
 import javax.persistence.*
 
 @Entity
@@ -14,4 +15,6 @@ class TrainRouteSection(
     @OneToOne
     var trainRoute: TrainRoute? = null,
     var routeOrder: Int = Int.MIN_VALUE
-)
+) {
+    fun toDto() = TrainRouteSectionDto(id, rail?.id ?: Long.MIN_VALUE, trainRoute?.id ?: Long.MIN_VALUE, routeOrder)
+}

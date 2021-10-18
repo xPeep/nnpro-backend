@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
+import cz.edu.upce.fei.nnpro.dto.RegionDto
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -15,4 +16,6 @@ class Region(
     @Size(max = 3)
     var code: String = ""
     //TODO add coordinates, zoom for view in map
-)
+) {
+    fun toDto() = RegionDto(id, name, code)
+}

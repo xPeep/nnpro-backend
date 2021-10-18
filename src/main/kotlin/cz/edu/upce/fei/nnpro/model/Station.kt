@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
+import cz.edu.upce.fei.nnpro.dto.StationDto
 import javax.persistence.*
 import javax.validation.constraints.NotBlank
 import javax.validation.constraints.Size
@@ -14,6 +15,8 @@ class Station(
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "region_id")
     var region: Region? = null,
-    var x: Double = Double.MIN_VALUE,
-    var y: Double = Double.MIN_VALUE,
-)
+    var x: Double = 0.0,
+    var y: Double = 0.0,
+) {
+    fun toDto() = StationDto(id, code, name, region?.id ?: Long.MIN_VALUE, x, y)
+}

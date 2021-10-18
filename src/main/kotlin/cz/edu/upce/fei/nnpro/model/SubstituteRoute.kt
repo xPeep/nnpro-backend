@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
+import cz.edu.upce.fei.nnpro.dto.SubstituteRouteDto
 import javax.persistence.*
 
 @Entity
@@ -11,4 +12,6 @@ class SubstituteRoute(
     @OneToOne
     @JoinColumn(name = "train_route_id")
     val concernedTrainRoute: TrainRoute? = null
-)
+) {
+    fun toDto() = SubstituteRouteDto(id, name, concernedTrainRoute?.id ?: Long.MIN_VALUE)
+}

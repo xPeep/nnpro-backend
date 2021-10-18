@@ -1,5 +1,6 @@
 package cz.edu.upce.fei.nnpro.model
 
+import cz.edu.upce.fei.nnpro.dto.TrainRouteDto
 import javax.persistence.Entity
 import javax.persistence.GeneratedValue
 import javax.persistence.GenerationType
@@ -13,4 +14,6 @@ class TrainRoute(
     var trainCode: String = "",
     //TODO asi nebude potreba, stacil by check, jestli jsou nejake Incidenty
     var closure: Boolean = false
-)
+) {
+    fun toDto() = TrainRouteDto(id, trainCode, closure)
+}
