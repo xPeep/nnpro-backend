@@ -1,6 +1,5 @@
 package cz.edu.upce.fei.nnpro.service
 
-
 import cz.edu.upce.fei.nnpro.dto.JwtResponseDto
 import cz.edu.upce.fei.nnpro.dto.ResponseDto
 import cz.edu.upce.fei.nnpro.dto.UserDto
@@ -8,15 +7,12 @@ import cz.edu.upce.fei.nnpro.model.Role
 import cz.edu.upce.fei.nnpro.repository.UserRepository
 import cz.edu.upce.fei.nnpro.security.jwt.JwtUtils
 import cz.edu.upce.fei.nnpro.security.service.UserDetailsImpl
-import net.bytebuddy.utility.RandomString
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.security.authentication.AuthenticationManager
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken
-import org.springframework.security.core.AuthenticationException
 import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
-
 
 @Service
 class UserService {
