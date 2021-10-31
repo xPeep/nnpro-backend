@@ -63,4 +63,5 @@ class UserService {
         return ResponseDto("User registered successfully!")
     }
 
+    fun getById(id: Long) = userRepository.getById(id).apply { password = "" }.toDto()
 }
