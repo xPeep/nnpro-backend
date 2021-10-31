@@ -10,7 +10,7 @@ class UserDto(
     var email: String = "",
     var password: String = "",
     val role: String = Role.ROLE_USER.name,
-    val group: String = UserGroup.NONE.name
+    val userGroup: String = UserGroup.NONE.name
 ) {
-    fun toModel() = User(id, username, email, password, Role.valueOf(role), UserGroup.valueOf(group))
+    fun toModel() = User(id, username, email, password, Role.valueOf(role), UserGroup.valueOf(userGroup))
 }

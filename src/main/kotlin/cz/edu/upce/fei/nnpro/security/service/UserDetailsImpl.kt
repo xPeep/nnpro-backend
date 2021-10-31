@@ -11,7 +11,8 @@ data class UserDetailsImpl(
     private val username: String,
     val email: String,
     @field:JsonIgnore private val password: String,
-    private val authorities: Collection<GrantedAuthority>
+    private val authorities: Collection<GrantedAuthority>,
+    val userGroup: String
 ) : UserDetails {
 
     override fun getAuthorities() = authorities
@@ -44,7 +45,8 @@ data class UserDetailsImpl(
                 user.username,
                 user.email,
                 user.password,
-                authorities
+                authorities,
+                user.userGroup.name
             )
         }
     }

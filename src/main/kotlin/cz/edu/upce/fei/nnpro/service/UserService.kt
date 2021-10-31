@@ -41,7 +41,7 @@ class UserService {
         val role = userDetails.authorities.first().authority
 
         return JwtResponseDto(
-            userDetails.id, userDetails.username, userDetails.email, role, jwt
+            userDetails.id, userDetails.username, userDetails.email, role, jwt, userDetails.userGroup
         )
     }
 
