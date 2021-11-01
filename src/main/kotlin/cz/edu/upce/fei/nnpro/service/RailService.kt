@@ -15,4 +15,6 @@ class RailService(
     fun getAll(): List<Rail> = railRepository.findAll()
 
     fun delete(rail: Rail) = railRepository.delete(rail)
+
+    fun deleteById(id: Long)= railRepository.deleteById(id)
 }

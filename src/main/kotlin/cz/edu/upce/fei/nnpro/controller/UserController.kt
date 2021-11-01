@@ -29,6 +29,15 @@ class UserController(
         return ResponseEntity.ok(userService.register(userDto))
     }
 
+    @GetMapping("/details")
+    fun detail(): ResponseEntity<Any> {
+        return try {
+            ResponseEntity.ok(userService.getLoggedUser())
+        } catch (e: JpaObjectRetrievalFailureException) {
+            ResponseEntity.status(542).body(ResponseDto("User not logged!"))
+        }
+    }
+
     @GetMapping("/{id}")
     fun detail(@PathVariable id: Long): ResponseEntity<Any> {
         return try {

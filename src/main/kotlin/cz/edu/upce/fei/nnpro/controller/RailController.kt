@@ -10,23 +10,26 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/rail")
 class RailController(
-    val railService: RailService
+	val railService: RailService
 ) {
-    @GetMapping("/{id}")
-    fun detail(@PathVariable id: Long): ResponseEntity<Any> {
-        return try {
-            ResponseEntity.ok(railService.getById(id))
-        } catch (e: JpaObjectRetrievalFailureException) {
-            ResponseEntity.status(542).body(ResponseDto("Rail with id $id not found!"))
-        }
-    }
+	@GetMapping("/{id}")
+	fun detail(@PathVariable id: Long): ResponseEntity<Any> {
+		return try {
+			ResponseEntity.ok(railService.getById(id))
+		} catch (e: JpaObjectRetrievalFailureException) {
+			ResponseEntity.status(542).body(ResponseDto("Rail with id $id not found!"))
+		}
+	}
 
-    @GetMapping
-    fun listAll(): List<Rail> = railService.getAll()
+	@GetMapping
+	fun listAll(): List<Rail> = railService.getAll()
 
-    @PostMapping
-    fun save(@RequestBody rail: Rail) = railService.save(rail)
+	@PostMapping
+	fun save(@RequestBody rail: Rail) = railService.save(rail)
 
-    @DeleteMapping
-    fun delete(@RequestBody rail: Rail) = railService.delete(rail)
+	@DeleteMapping
+	fun delete(@RequestBody rail: Rail) = railService.delete(rail)
+
+	@DeleteMapping("/{id}")
+	fun deleteById(@PathVariable id: Long) = railService.deleteById(id)
 }

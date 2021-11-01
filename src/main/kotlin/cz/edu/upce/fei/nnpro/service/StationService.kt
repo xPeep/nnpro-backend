@@ -15,4 +15,6 @@ class StationService(
     fun getAll(): List<Station> = stationRepository.findAll()
 
     fun delete(region: Station) = stationRepository.delete(region)
+
+    fun deleteById(id: Long) = stationRepository.deleteById(id)
 }
